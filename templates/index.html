@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infix Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        async function convertExpression() {
+            let expression = document.getElementById("expression").value;
+            let response = await fetch('/convert', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ expression })
+            });
+            let result = await response.json();
+            document.getElementById("postfix").innerText = "Postfix: " + result.postfix;
+            document.getElementById("prefix").innerText = "Prefix: " + result.prefix;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Infix to Postfix & Prefix Converter</h2>
+        <input type="text" id="expression" placeholder="Enter infix expression">
+        <button onclick="convertExpression()">Convert</button>
+        <p class="result" id="postfix"></p>
+        <p class="result" id="prefix"></p>
+    </div>
+    <footer>
+        <p>Created by Malikul Islam</p>
+    </footer>
+</body>
+</html>
