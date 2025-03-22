@@ -23,6 +23,8 @@ def infix_to_postfix(expression):
             while stack and stack[-1] != '(':
                 output.append(stack.pop())
             stack.pop()
+        elif char == " ":
+            continue
         else:  # Operator
             while (stack and stack[-1] != '(' and
                    (precedence(stack[-1]) > precedence(char) or
@@ -48,6 +50,8 @@ def infix_to_prefix(expression):
             while stack and stack[-1] != '(':
                 output.append(stack.pop())
             stack.pop()
+        elif char == " ":
+            continue
         else:  # Operator
             while (stack and stack[-1] != '(' and
                    (precedence(stack[-1]) > precedence(char) or
